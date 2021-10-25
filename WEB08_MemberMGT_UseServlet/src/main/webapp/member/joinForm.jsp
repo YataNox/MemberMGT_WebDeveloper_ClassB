@@ -61,7 +61,7 @@
 					<td>등급</td>
 					<td>
 						<input type="radio" name="admin" value="0" checked="checked">일반회원&nbsp;
-						<input type="radio" name="admin" value="1" checked="checked">관리자
+						<input type="radio" name="admin" value="1">관리자
 					</td>
 				</tr>
 				<tr>
