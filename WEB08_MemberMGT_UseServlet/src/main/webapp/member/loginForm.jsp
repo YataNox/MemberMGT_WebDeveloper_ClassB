@@ -36,7 +36,7 @@
 					<!-- loginCheck() 함수가 리턴해주는 true/false에 따라 form이
 					action에 설정된 페이지로 이동할지 멈출지가 결정됩니다. false가 리턴되면 action으로 이동이 멈춤
 					true가 리턴되면 이동은 계속 진행 -->
-					<input type="button" value="회원가입"></td>
+					<input type="button" value="회원가입" onClick="join.do"></td>
 				</tr>
 				<tr>
 					<td colspan="2">${message}</td>
