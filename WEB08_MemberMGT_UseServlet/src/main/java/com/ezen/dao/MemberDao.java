@@ -93,4 +93,21 @@ public class MemberDao {
 		close();
 		return result;
 	}
+
+	public int insertMember(MemberDto mdto) {
+		int result = 0;
+		
+		con = getConnection();
+		
+		String sql = "";
+		try {
+			 pstmt = con.prepareStatement(sql);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
 }
