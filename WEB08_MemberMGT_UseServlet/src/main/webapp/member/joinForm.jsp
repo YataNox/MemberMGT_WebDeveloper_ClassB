@@ -23,6 +23,35 @@
 				// 세 번째 인수 : 팝업창의 크기 위치등의 옵션
 						
 			}
+			
+			function joinCheck(){
+				if(document.frm.name.value.length==0){
+					alert("이름은 필수 입력 사항입니다.");
+					document.frm.name.focus();
+					return false;
+				}
+				if(document.frm.userid.value.length==0){
+					alert("아이디는 필수 입력 사항입니다.");
+					document.frm.userid.focus();
+					return false;
+				}
+				if(document.frm.userid.value != document.frm.reid.value){
+					alert("아이디 중복체크를 하지 않으셨습니다.");
+					document.frm.userid.focus();
+					return false;
+				}
+				if(document.frm.userpwd.value.length==0){
+					alert("비밀번호는 필수 입력 사항입니다.");
+					document.frm.userpwd.focus();
+					return false;
+				}
+				if(document.frm.userpwd.value != document.frm.userpwd_check.value){
+					alert("비밀번호 확인이 일치하지 않습니다.");
+					document.frm.userpwd_check.focus();
+					return false;
+				}
+				return true;
+			}
 		</script>
 	</head>
 	<body>
