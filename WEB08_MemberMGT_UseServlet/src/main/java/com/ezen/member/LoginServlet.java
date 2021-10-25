@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ezen.dao.MemberDao;
+import com.ezen.dto.MemberDto;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -54,6 +57,31 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		String id = request.getParameter("userid");
+		String pwd = request.getParameter("userpwd");
+		
+		// 로그인 실패(아이디 비번오류)했을 때 포워딩 할 경로
+		String url = "member/loginForm.jsp";
+		
+		MemberDao mdao = MemberDao.getInstance();
+		MemberDto mdto = mdao.getMember(id);
+		
+		if(mdto == null) { // 해당 아이디 없습니다.
+			request.setAttribute("message", "존재하지 않는 아이디 입니다.");
+		}else if(mdto.getUserpwd() == null) { // 시스템 오류 관리자에게 문의
+			request.setAttribute("message", "시스템 오류 관리자에게 문의하세요.");
+		}else if(mdto.getUserpwd().equals(pwd)) { // 정상 로그인
+			url = "main.jsp";
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", mdto);
+		}else if(!mdto.getUserpwd().equals(pwd)) { // 비밀번호가 틀립니다.
+			request.setAttribute("message", "비밀번호가 틀립니다.");
+		}else { // 어쨋든 로그인 실패
+			request.setAttribute("message", "기타 사유로 로그인에 실패합니다.");
+		}
+		RequestDispatcher dp = request.getRequestDispatcher(url);
+		dp.forward(request, response);
 	}
 
 }
