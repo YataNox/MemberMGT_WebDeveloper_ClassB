@@ -71,4 +71,26 @@ public class MemberDao {
 		close();
 		return mdto;
 	}
+
+	public int confirmID(String userid){
+		int result = 0;
+		con = getConnection();
+		
+		String sql = "select * from member where userid= ?";
+		try {
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, userid);
+			 rs = pstmt.executeQuery();
+			 if(rs.next()) { // 사용 중
+				 result = 1;
+			 }else { // 사용가능
+				 result = -1;
+			 }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
 }
