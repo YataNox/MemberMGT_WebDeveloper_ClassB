@@ -51,7 +51,7 @@ public class MemberDao {
 		MemberDto mdto = null;
 		
 		con = getConnection();
-		String sql = "select * from member where id= ?";
+		String sql = "select * from member where userid= ?";
 		try {
 			 pstmt = con.prepareStatement(sql);
 			 pstmt.setString(1, id);
