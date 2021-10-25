@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.ezen.dto.MemberDto;
+
 public class MemberDao {
 	// 싱글턴 설정
 	private MemberDao() {}
@@ -43,5 +45,30 @@ public class MemberDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public MemberDto getMember(String id) {
+		MemberDto mdto = null;
+		
+		con = getConnection();
+		String sql = "select * from member where id= ?";
+		try {
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, id);
+			 rs = pstmt.executeQuery();
+			 if(rs.next()) {
+				 mdto = new MemberDto();
+				 mdto.setName(rs.getString("name"));
+				 mdto.setUserid(rs.getString("userid"));
+				 mdto.setUserpwd(rs.getString("userpwd"));
+				 mdto.setEmail(rs.getString("email"));
+				 mdto.setPhone(rs.getString("phone"));
+				 mdto.setAdmin(rs.getString("admin"));
+			 }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		close();
+		return mdto;
 	}
 }
