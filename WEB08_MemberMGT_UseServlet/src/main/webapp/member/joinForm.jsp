@@ -4,6 +4,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>joinForm</title>
+		<script>
+			function idCheck(){
+				if(document.frm.userid.value == ""){
+					alert("아이디를 입력해주세요.");
+					document.from.userid.focus();
+					return;
+				}
+				
+				var inputid = document.frm.userid.value;
+				var opt = "toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=500, height=200";
+				window.open("idcheck.do?userid=" + inputid, "idcheck", opt);
+				// 팝업창 오픈 메뉴의 idcheck.do는 서블릿이며, 서블릿에서 아이디 중복체크 작업을 한 후, 결과를 싣고 포워딩하는
+				// 페이지의 팝업창에 표시될 예정입니다.
+				// 서블릿 호출 시 파리미터를 위와 같이 호출되는 주소에 ? 함께 전달할 수 있습니다.
+				
+				// 두 번째 인수 : 팝업창의 타이틀(이름)
+				// 세 번째 인수 : 팝업창의 크기 위치등의 옵션
+						
+			}
+		</script>
 	</head>
 	<body>
 		<h2>회원가입</h2>
