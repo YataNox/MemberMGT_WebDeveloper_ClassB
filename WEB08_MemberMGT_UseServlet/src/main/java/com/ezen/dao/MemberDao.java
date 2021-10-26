@@ -175,4 +175,32 @@ public class MemberDao {
 		close();
 		return result;
 	}
+
+	public void editAdmin(String userid) {
+		con = getConnection();
+		String sql = "select * from member where userid=?";
+		int admin=0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				admin = rs.getInt("admin");
+				pstmt.close();
+			}
+			
+			sql = "update member set admin = ? where userid = ?";
+			pstmt = con.prepareStatement(sql);
+			if(admin == 1)
+				pstmt.setInt(1, 0);
+			else
+				pstmt.setInt(1, 1);
+			
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		close();
+	}
 }
