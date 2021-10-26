@@ -41,11 +41,15 @@
 						<td>${mem.email}</td>
 						<td>${mem.admin}</td>
 						<td>
-							<c:if test="${mem.admin == 0}">
-								<input type="button" value="관리자로 변경">
-							</c:if>
-							<c:if test="${mem.admin == 1}">
-								<input type="button" value="일반회원으로 변경">
+							<c:if test="${mem.userid != loginUser.userid}">
+								<c:if test="${mem.admin == 0}">
+									<input type="button" value="관리자로 변경"
+									onClick="location.href='editadmin.do?userid=${mem.userid}'">
+								</c:if>
+								<c:if test="${mem.admin == 1}">
+									<input type="button" value="일반회원으로 변경"
+									onClick="location.href='editadmin.do?userid=${mem.userid}'">
+								</c:if>
 							</c:if>
 						</td>
 					</tr>
