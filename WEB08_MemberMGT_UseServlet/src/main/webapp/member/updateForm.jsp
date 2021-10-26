@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<td>아이디</td>
-					<td>${loginUser.userid}"
+					<td>${loginUser.userid}" <%-- ${updateMember.userid} --%>
 						<input type="hidden" name="userid" value="${loginUser.userid}"/>
 					</td>
 				</tr>
