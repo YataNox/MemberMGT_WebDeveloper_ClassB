@@ -8,6 +8,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>updateForm</title>
+		<script>
+		function joinCheck(){
+			if(document.frm.name.value.length==0){
+				alert("이름은 필수 입력 사항입니다.");
+				document.frm.name.focus();
+				return false;
+			}
+			if(document.frm.userpwd.value.length==0){
+				alert("비밀번호는 필수 입력 사항입니다.");
+				document.frm.userpwd.focus();
+				return false;
+			}
+			if(document.frm.userpwd.value != document.frm.userpwd_check.value){
+				alert("비밀번호 확인이 일치하지 않습니다.");
+				document.frm.userpwd_check.focus();
+				return false;
+			}
+			return true;
+		}
+		</script>
 	</head>
 	<body>
 		<h2>회원정보 수정</h2>
@@ -15,11 +35,11 @@
 			<table>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="name" value="${member.name}" size="20">&nbsp;</td>
+					<td><input type="text" name="name" value="${loginUser.name}" size="20">&nbsp;</td>
 				</tr>
 				<tr>
 					<td>아이디</td>
-					<td>${loginUser.userid}" <%-- ${updateMember.userid} --%>
+					<td>${loginUser.userid} <%-- ${updateMember.userid} --%>
 						<input type="hidden" name="userid" value="${loginUser.userid}"/>
 					</td>
 				</tr>
