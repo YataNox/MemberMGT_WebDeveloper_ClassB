@@ -149,4 +149,29 @@ public class MemberDao {
 		close();
 		return list;
 	}
+
+	public int updateMember(MemberDto mdto) 
+	{
+		int result = 0;
+		
+		con = getConnection();
+		String sql = "update member set name=?, userid=?, userpwd=?, email=?, phone=?, admin=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getName());
+			pstmt.setString(2, mdto.getUserid());
+			pstmt.setString(3, mdto.getUserpwd());
+			pstmt.setString(4, mdto.getEmail());
+			pstmt.setString(5, mdto.getPhone());
+			pstmt.setInt(6, mdto.getAdmin());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return result;
+	}
 }
