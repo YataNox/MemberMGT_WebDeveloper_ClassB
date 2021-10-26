@@ -6,7 +6,7 @@ public class MemberDto {
 	private String userpwd;
 	private String email;
 	private String phone;
-	private String admin;
+	private int admin;
 	
 	public String getName() {
 		return name;
@@ -38,10 +38,10 @@ public class MemberDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAdmin() {
+	public int getAdmin() {
 		return admin;
 	}
-	public void setAdmin(String admin) {
+	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
 	
