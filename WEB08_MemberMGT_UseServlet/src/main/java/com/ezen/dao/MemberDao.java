@@ -124,7 +124,7 @@ public class MemberDao {
 		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
 		
 		con = getConnection();
-		String sql = "select * from member order by name;";
+		String sql = "select * from member";
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
