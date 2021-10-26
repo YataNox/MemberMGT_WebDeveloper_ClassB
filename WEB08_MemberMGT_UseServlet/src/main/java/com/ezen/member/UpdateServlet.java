@@ -70,7 +70,7 @@ public class UpdateServlet extends HttpServlet {
 		if(result == 1) {
 			request.setAttribute("message", "회원 정보를 수정하였습니다.");
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", session);
+			session.setAttribute("loginUser", mdto);
 		}else {
 			request.setAttribute("message", "회원 정보 수정 오류. 관리자에게 문의하세요.");
 		}
