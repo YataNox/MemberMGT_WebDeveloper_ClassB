@@ -45,6 +45,7 @@
 								<c:if test="${mem.admin == 0}">
 									<input type="button" value="관리자로 변경"
 									onClick="location.href='editadmin.do?userid=${mem.userid}'">
+									<!-- 서블릿이름 EditAdminServlet -->  
 								</c:if>
 								<c:if test="${mem.admin == 1}">
 									<input type="button" value="일반회원으로 변경"
