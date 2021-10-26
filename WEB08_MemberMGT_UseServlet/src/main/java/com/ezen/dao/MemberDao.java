@@ -155,7 +155,7 @@ public class MemberDao {
 		int result = 0;
 		
 		con = getConnection();
-		String sql = "update member set name=?, userid=?, userpwd=?, email=?, phone=?, admin=?";
+		String sql = "update member set name=?, userid=?, userpwd=?, email=?, phone=?, admin=? where userid= ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getName());
@@ -164,6 +164,7 @@ public class MemberDao {
 			pstmt.setString(4, mdto.getEmail());
 			pstmt.setString(5, mdto.getPhone());
 			pstmt.setInt(6, mdto.getAdmin());
+			pstmt.setString(7, mdto.getUserid());
 			
 			result = pstmt.executeUpdate();
 			
