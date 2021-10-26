@@ -196,6 +196,7 @@ public class MemberDao {
 				pstmt.setInt(1, 0);
 			else
 				pstmt.setInt(1, 1);
+			pstmt.setString(2, userid);
 			
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
