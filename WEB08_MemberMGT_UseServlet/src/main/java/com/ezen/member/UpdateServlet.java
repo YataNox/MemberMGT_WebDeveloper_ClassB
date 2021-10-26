@@ -54,7 +54,29 @@ public class UpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		MemberDto mdto = new MemberDto();
+		mdto.setName(request.getParameter("name"));
+		mdto.setUserid(request.getParameter("userid"));
+		mdto.setUserpwd(request.getParameter("userpwd"));
+		mdto.setEmail(request.getParameter("email"));
+		mdto.setPhone(request.getParameter("phone"));
+		mdto.setAdmin(Integer.parseInt(request.getParameter("admin")));
+		
+		MemberDao mdao = MemberDao.getInstance();
+		int result = mdao.updateMember(mdto);
+		
+		if(result == 1) {
+			request.setAttribute("message", "회원 정보를 수정하였습니다.");
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", session);
+		}else {
+			request.setAttribute("message", "회원 정보 수정 오류. 관리자에게 문의하세요.");
+		}
+		
+		RequestDispatcher dp = request.getRequestDispatcher("main.do");
+		dp.forward(request, response);
 	}
 
 }
