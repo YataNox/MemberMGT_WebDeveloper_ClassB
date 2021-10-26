@@ -49,7 +49,7 @@ public class JoinServlet extends HttpServlet {
 		mdto.setUserpwd(request.getParameter("userpwd"));
 		mdto.setEmail(request.getParameter("email"));
 		mdto.setPhone(request.getParameter("phone"));
-		mdto.setAdmin(request.getParameter("admin"));
+		mdto.setAdmin(Integer.parseInt(request.getParameter("admin")));
 		
 		int result = mdao.insertMember(mdto);
 		

@@ -63,7 +63,7 @@ public class MemberDao {
 				 mdto.setUserpwd(rs.getString("userpwd"));
 				 mdto.setEmail(rs.getString("email"));
 				 mdto.setPhone(rs.getString("phone"));
-				 mdto.setAdmin(rs.getString("admin"));
+				 mdto.setAdmin(rs.getInt("admin"));
 			 }
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -99,9 +99,17 @@ public class MemberDao {
 		
 		con = getConnection();
 		
-		String sql = "";
+		String sql = "insert into member values(?,?,?,?,?,?)";
 		try {
 			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, mdto.getName());
+			 pstmt.setString(2, mdto.getUserid());
+			 pstmt.setString(3, mdto.getUserpwd());
+			 pstmt.setString(4, mdto.getEmail());
+			 pstmt.setString(5, mdto.getPhone());
+			 pstmt.setInt(6, mdto.getAdmin());
+			 
+			 result = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
