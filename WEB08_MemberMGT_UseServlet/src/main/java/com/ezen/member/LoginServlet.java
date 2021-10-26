@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		
 		// loginUesr 세션 값이 null이 아니라면
 		if(session.getAttribute("loginUser") != null) {
-			url = "main.jsp"; // 누군가 로그인 되어있는 상태라면 포워딩될 경로를 변경
+			url = "main.do"; // 누군가 로그인 되어있는 상태라면 포워딩될 경로를 변경
 		}
 		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
@@ -66,13 +66,13 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberDao mdao = MemberDao.getInstance();
 		MemberDto mdto = mdao.getMember(id);
-		
+
 		if(mdto == null) { // 해당 아이디 없습니다.
 			request.setAttribute("message", "존재하지 않는 아이디 입니다.");
 		}else if(mdto.getUserpwd() == null) { // 시스템 오류 관리자에게 문의
 			request.setAttribute("message", "시스템 오류 관리자에게 문의하세요.");
 		}else if(mdto.getUserpwd().equals(pwd)) { // 정상 로그인
-			url = "main.jsp";
+			url = "main.do";
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", mdto);
 		}else if(!mdto.getUserpwd().equals(pwd)) { // 비밀번호가 틀립니다.
@@ -80,6 +80,7 @@ public class LoginServlet extends HttpServlet {
 		}else { // 어쨋든 로그인 실패
 			request.setAttribute("message", "기타 사유로 로그인에 실패합니다.");
 		}
+		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
 	}
