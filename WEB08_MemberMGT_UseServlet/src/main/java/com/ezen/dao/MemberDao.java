@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.ezen.dto.MemberDto;
 
@@ -117,5 +118,35 @@ public class MemberDao {
 		
 		close();
 		return result;
+	}
+
+	public ArrayList<MemberDto> selectMember() {
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
+		
+		con = getConnection();
+		String sql = "select * from member order by name;";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberDto mdto = new MemberDto();
+				mdto.setName(rs.getString("name"));
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setUserpwd(rs.getString("userpwd"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setAdmin(rs.getInt("admin"));
+				
+				list.add(mdto);
+			}
+			 
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		close();
+		return list;
 	}
 }

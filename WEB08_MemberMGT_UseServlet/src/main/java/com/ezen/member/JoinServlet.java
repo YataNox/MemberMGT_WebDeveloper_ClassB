@@ -45,6 +45,7 @@ public class JoinServlet extends HttpServlet {
 		MemberDto mdto = new MemberDto();
 		MemberDao mdao = MemberDao.getInstance();
 		
+		mdto.setName(request.getParameter("name"));
 		mdto.setUserid(request.getParameter("userid"));
 		mdto.setUserpwd(request.getParameter("userpwd"));
 		mdto.setEmail(request.getParameter("email"));
